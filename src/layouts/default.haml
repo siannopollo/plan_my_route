@@ -1,7 +1,20 @@
 !!!
-%html
+%html{:xmlns=>"http://www.w3.org/1999/xhtml"}
   %head
-    %title StaticMatic
-    = stylesheets
+    %title Plan My Route
+    = stylesheets :screen, :media => :screen
+    /[if IE 6]
+      %link(href="/stylesheets/ie6.css" rel="stylesheet" type="text/css")
+    %script(type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/mootools/1.2.4/mootools-yui-compressed.js")
+    = javascripts :placeholder
   %body
-    = yield
+    #header
+      .wrap
+        %h4 Plan My Route
+    #page
+      #main
+        #content
+          .wrap= yield
+    #footer
+      &copy; 2011
+      = link_to 'Steve Iannopollo', 'http://iannopollo.com', :target => '_blank'

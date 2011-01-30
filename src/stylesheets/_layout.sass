@@ -1,0 +1,32 @@
+$page-width: 980px
+$page-pad: 20px
+$main-width: $page-width !default
+
+.invert-pad
+  margin-left: -$page-pad
+  margin-right: -$page-pad
+.page-pad
+  padding-left: $page-pad
+  padding-right: $page-pad
+.page-width
+  width: $page-width
+  margin: 0 auto
+
+body
+  min-width: $page-width
+  #header .wrap
+    @extend .page-width
+    padding: $page-pad 0
+  #page
+    @extend .clear
+    #main
+      @extend .clear
+      #content
+        .wrap
+          margin: 0 auto
+          width: $main-width - $page-pad
+          padding: $page-pad
+  #footer
+    @extend .page-width
+    padding: $page-pad 0
+    text-align: center

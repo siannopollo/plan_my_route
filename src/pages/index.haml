@@ -1,1 +1,11 @@
-%h1 StaticMatic!
+#planning
+  %form{:action => '/', :method => 'get'}
+    .start
+      .set= text_field :starting_address, '', :placeholder => 'Starting Address'
+    .set= text_field :address1, '', :placeholder => 'Address 1'
+    .set= text_field :address2, '', :placeholder => 'Address 2'
+    .set= text_field :address3, '', :placeholder => 'Address 3'
+    .set= text_field :address4, '', :placeholder => 'Address 4'
+    .buttons
+      %button{:type => :submit} Plan My Route
+      

@@ -1,4 +1,44 @@
+@import compass
++global-reset
+@import fancy-buttons
+@import rgbapng
+@import extensions
+@import typography
+@import colors
+@import base_classes
+@import layout
+@import inputs
+@import planning
+
+$page-color: desaturate(lighten($green, 15), 20)
+$button-color: saturate(adjust-hue(darken($page-color, 2), 120), 10)
+
 body
-  font:
-    family: Verdana
-    size: 10pt
+  background-color: $page-color
+  #header
+    #{headings()}
+      padding: 0
+    color: #efefef
+    +linear-gradient(color-stops(lighten($page-color, 30), $page-color))
+    background-color: $page-color
+    padding-bottom: 3px
+    .wrap
+      height: 60px
+      h4
+        line-height: 60px
+  #page
+    .wrap
+      @extend .round-corners
+      background-color: #fff
+      +box-shadow
+  #footer
+    color: #333
+    a
+      color: #fff
+      text-decoration: none
+      &:hover
+        text-decoration: underline
+  button
+    +fancy-button($button-color, 18px, 8px, 3px)
+    -webkit-background-clip: padding-box
+    padding: .5em 1em

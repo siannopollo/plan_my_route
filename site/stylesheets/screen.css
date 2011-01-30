@@ -1,5 +1,166 @@
-/* line 1 */
+/* line 14, /opt/local/lib/ruby/gems/1.8/gems/compass-0.10.5/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, font, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  font-weight: inherit;
+  font-style: inherit;
+  font-size: 100%;
+  font-family: inherit;
+  vertical-align: baseline;
+}
+
+/* line 17, /opt/local/lib/ruby/gems/1.8/gems/compass-0.10.5/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+body {
+  line-height: 1;
+  color: black;
+  background: white;
+}
+
+/* line 19, /opt/local/lib/ruby/gems/1.8/gems/compass-0.10.5/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+ol, ul {
+  list-style: none;
+}
+
+/* line 21, /opt/local/lib/ruby/gems/1.8/gems/compass-0.10.5/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+table {
+  border-collapse: separate;
+  border-spacing: 0;
+  vertical-align: middle;
+}
+
+/* line 23, /opt/local/lib/ruby/gems/1.8/gems/compass-0.10.5/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+caption, th, td {
+  text-align: left;
+  font-weight: normal;
+  vertical-align: middle;
+}
+
+/* line 25, /opt/local/lib/ruby/gems/1.8/gems/compass-0.10.5/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+q, blockquote {
+  quotes: "" "";
+}
+/* line 96, /opt/local/lib/ruby/gems/1.8/gems/compass-0.10.5/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+q:before, q:after, blockquote:before, blockquote:after {
+  content: "";
+}
+
+/* line 27, /opt/local/lib/ruby/gems/1.8/gems/compass-0.10.5/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+a img {
+  border: none;
+}
+
+/* incase an inverted custom gradient isn't specified */
+/* line 168, /opt/local/lib/ruby/gems/1.8/gems/fancy-buttons-0.6.0.pre1/lib/stylesheets/./_fancy-buttons.sass */
+.fancy-button-reset-base-class, body button {
+  font-family: "Lucida Grande", Lucida, Arial, sans-serif;
+  background: url('images/button_bg.png?1285265535') repeat-x bottom left;
+  margin: 0;
+  width: auto;
+  overflow: visible;
+  display: inline-block;
+  cursor: pointer;
+  text-decoration: none;
+  border-style: solid;
+  font-weight: bold;
+}
+/* line 157, /opt/local/lib/ruby/gems/1.8/gems/fancy-buttons-0.6.0.pre1/lib/stylesheets/./_fancy-buttons.sass */
+.fancy-button-reset-base-class::-moz-focus-inner, body button::-moz-focus-inner {
+  border: none;
+  padding: 0;
+}
+/* line 160, /opt/local/lib/ruby/gems/1.8/gems/fancy-buttons-0.6.0.pre1/lib/stylesheets/./_fancy-buttons.sass */
+.fancy-button-reset-base-class:focus, body button:focus {
+  outline: none;
+}
+
+/*
+  Mixins are slightly modified from Benjamin Doherty's first implementations: http://gist.github.com/377912
+  rgba-background mixin can now be passed an option $dir variable
+*/
+/* line 5, ./src/stylesheets/./_layout.sass */
+body {
+  min-width: 980px;
+}
+
+/* line 7, ./src/stylesheets/./_layout.sass */
+#header .wrap {
+  padding: 20px 0;
+}
+
+/* line 15, ./src/stylesheets/./_layout.sass */
+#content .wrap {
+  margin: 0 auto;
+  width: 960px;
+  padding-right: 20px;
+}
+
+/* line 19, ./src/stylesheets/./_layout.sass */
+#footer {
+  padding: 20px 0;
+}
+
+/* line 8 */
 body {
   font-family: Verdana;
   font-size: 10pt;
+}
+/* line 12 */
+body button {
+  -moz-border-radius: 8px;
+  -webkit-border-radius: 8px;
+  -o-border-radius: 8px;
+  -ms-border-radius: 8px;
+  -khtml-border-radius: 8px;
+  border-radius: 8px;
+  font-size: 20px;
+  line-height: 1.2em;
+  padding: 0.3em 1em;
+  border-width: 3px;
+  background-color: #004dae;
+  background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(0%, #73a4e3), color-stop(10%, #2a73d1), color-stop(50%, #1a4984), color-stop(50%, #184278), color-stop(100%, #2059a2));
+  background-image: -moz-linear-gradient(top, #73a4e3 0%, #2a73d1 10%, #1a4984 50%, #184278 50%, #2059a2 100%);
+  background-image: linear-gradient(top, #73a4e3 0%, #2a73d1 10%, #1a4984 50%, #184278 50%, #2059a2 100%);
+  border-color: #102d51;
+  text-shadow: #00142f 0px 1px 1px;
+  -webkit-background-clip: padding-box;
+  padding: 0.5em 1em;
+}
+/* line 106, /opt/local/lib/ruby/gems/1.8/gems/fancy-buttons-0.6.0.pre1/lib/stylesheets/./_fancy-buttons.sass */
+body button, body button:visited {
+  color: white;
+}
+/* line 26, /opt/local/lib/ruby/gems/1.8/gems/fancy-buttons-0.6.0.pre1/lib/stylesheets/./_fancy-buttons.sass */
+body button:hover, body button:focus {
+  background-color: #00469f;
+  background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(0%, #679ce0), color-stop(10%, #276cc4), color-stop(50%, #184278), color-stop(50%, #153b6b), color-stop(100%, #1e5295));
+  background-image: -moz-linear-gradient(top, #679ce0 0%, #276cc4 10%, #184278 50%, #153b6b 50%, #1e5295 100%);
+  background-image: linear-gradient(top, #679ce0 0%, #276cc4 10%, #184278 50%, #153b6b 50%, #1e5295 100%);
+  border-color: #0e2644;
+  text-shadow: #000e1f 0px 1px 1px;
+}
+/* line 106, /opt/local/lib/ruby/gems/1.8/gems/fancy-buttons-0.6.0.pre1/lib/stylesheets/./_fancy-buttons.sass */
+body button:hover, body button:hover:visited, body button:focus, body button:focus:visited {
+  color: white;
+}
+/* line 31, /opt/local/lib/ruby/gems/1.8/gems/fancy-buttons-0.6.0.pre1/lib/stylesheets/./_fancy-buttons.sass */
+body button:active {
+  background-color: #003f8f;
+  background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(0%, #184278), color-stop(30%, #1a4780), color-stop(50%, #163d6f), color-stop(50%, #143662), color-stop(100%, #1f5599));
+  background-image: -moz-linear-gradient(top, #184278 0%, #1a4780 30%, #163d6f 50%, #143662 50%, #1f5599 100%);
+  background-image: linear-gradient(top, #184278 0%, #1a4780 30%, #163d6f 50%, #143662 50%, #1f5599 100%);
+  border-color: #0b1f38;
+  text-shadow: #000710 0px -1px -1px;
+}
+/* line 106, /opt/local/lib/ruby/gems/1.8/gems/fancy-buttons-0.6.0.pre1/lib/stylesheets/./_fancy-buttons.sass */
+body button:active, body button:active:visited {
+  color: white;
 }
