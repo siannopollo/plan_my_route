@@ -2,10 +2,11 @@
   %form{:action => '/', :method => 'get'}
     .start
       .set= text_field :starting_address, '', :placeholder => 'Starting Address'
-    .set= partial 'address_field', :locals => {:index => 1}
-    .set= partial 'address_field', :locals => {:index => 2}
-    .set= partial 'address_field', :locals => {:index => 3}
-    .set= partial 'address_field', :locals => {:index => 4}
+    .addresses
+      .set= partial 'address_field', :locals => {:index => 1}
+      .set= partial 'address_field', :locals => {:index => 2}
+      .set= partial 'address_field', :locals => {:index => 3}
+      .set= partial 'address_field', :locals => {:index => 4}
     .buttons
       %button{:type => :submit} Plan My Route
       .spinner.hide
@@ -14,4 +15,3 @@
 
 :javascript
   window.route = new PlanMyRoute.Route($('planning'));
-  window.route.addressTemplate = "#{partial('address_field', :locals => {:index => '{index}'}).gsub('"', "'").gsub("\n", '')}";

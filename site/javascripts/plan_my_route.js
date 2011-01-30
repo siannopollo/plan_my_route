@@ -77,7 +77,12 @@ PlanMyRoute = {
     },
     
     createAddressAfter: function(existingAddress) {
-      var html = this.addressTemplate.substitute({'index': this.addresses.length});
+      var newContainer = existingAddress.container.clone();
+      existingAddress.container.grab(newContainer, 'after');
+      var input = newContainer.getElement('input'); input.set('value', '');
+      this.registerAddress(new PlanMyRoute.Address(input, this));
+      
+      this.reorderPlaceholders();
     },
     
     assignStartingAddressLocation: function() {
@@ -111,14 +116,13 @@ PlanMyRoute = {
     
     reorderPlaceholders: function() {
       var i = 1;
-      this.addresses.each(function(address) {
-        if (!address.start) {
-          var input = address.element;
-          input.set('name', 'address' + i);
-          input.set('placeholder', 'Address ' + i);
-          if (input.hasClass('placeholder')) input.set('value', 'Address ' + i);
-          i++;
-        }
+      this.form.getElements('.addresses input').each(function(input) {
+        console.log(input)
+        input.set('name', 'address' + i);
+        input.set('id', 'address' + i);
+        input.set('placeholder', 'Address ' + i);
+        if (input.hasClass('placeholder')) input.set('value', 'Address ' + i);
+        i++;
       });
     }
   })
