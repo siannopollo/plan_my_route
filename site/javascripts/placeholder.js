@@ -81,7 +81,7 @@ this.Form.Placeholder = new Class({
   }
 });
 
-Element.addEvent(window, 'load', function(event) {
+Element.addEvent(window, 'domready', function(event) {
   $$('input[placeholder]').each(function(input) {
     new Form.Placeholder(input);
   });

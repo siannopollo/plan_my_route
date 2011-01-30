@@ -6,7 +6,7 @@ end
 desc "Builds the site"
 task :build => 'styles:clear' do
   puts "*** Building the site ***"
-  system "rm -f ./site/stylesheets/* && staticmatic build ."
+  system "rm -f ./site/stylesheets/*.css && staticmatic build ."
 end
 
 desc "Clears and generates new styles, builds and deploys"
@@ -24,7 +24,7 @@ namespace :styles do
   desc "Clears the styles"
   task :clear do
     puts "*** Clearing styles ***"
-    system "rm -Rfv site/stylesheets/*"
+    system "rm -Rfv site/stylesheets/*.css"
   end
   
   desc "Generates new styles"

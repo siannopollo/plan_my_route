@@ -11,37 +11,28 @@ $form-set-width: 460px
       margin: 0.3em
       .action
         @extend .invisible
+        @extend .pictos-font
         display: inline-block
         cursor: pointer
-        +border-radius(10px)
-        color: #fff
-        +smart-text-shadow(#333)
-        font-size: 12px
-        font-weight: bold
+        font-size: 18px
         line-height: 1em
-        margin-right: 3px
       .remove
-        background-color: $red
-        border: solid 1px darken($red, 10)
-        padding: 2px 6px 4px
+        color: $red
         position: absolute
         top: -8px
         left: -10px
       .make_first
-        background-color: $blue
-        border: solid 1px darken($blue, 10)
-        font-size: 11px
-        padding: 0.1em 0.3em 0.3em
-        sup
-          font-weight: normal
+        color: $blue
+      .add
+        color: $green
       &:hover
         .action
           @extend .visible
       &.first
         .action.make_first
-          background-color: $page-color
-          border: solid 1px darken($page-color, 10)
           @extend .visible
+          color: $yellow
+          font-weight: bold
     .start
       margin-bottom: 0.7em
       input

@@ -7,6 +7,7 @@ PlanMyRoute = {
       
       this.container = this.element.getParent('.set');
       this.makeFirstTrigger = this.container.getElement('.make_first');
+      this.addAddressTrigger = this.container.getElement('.add');
       this.removeTrigger = this.container.getElement('.remove');
       
       this.latitude = null,
@@ -14,6 +15,10 @@ PlanMyRoute = {
       this.first = false;
       
       this.observeElements();
+    },
+    
+    addAddress: function(event) {
+      this.route.createAddressAfter(this);
     },
     
     makeFirst: function(event) {
@@ -30,6 +35,7 @@ PlanMyRoute = {
     observeElements: function() {
       if (!this.start) {
         this.makeFirstTrigger.addEvent('click', this.makeFirst.bind(this));
+        this.addAddressTrigger.addEvent('click', this.addAddress.bind(this));
         this.removeTrigger.addEvent('click', this.remove.bind(this));
       }
     },
@@ -40,20 +46,7 @@ PlanMyRoute = {
       
       this.container.dispose();
       this.route.addresses.erase(this);
-      this.reorderPlaceholders();
-    },
-    
-    reorderPlaceholders: function() {
-      var i = 1;
-      this.route.addresses.each(function(address) {
-        if (!address.start) {
-          var input = address.element;
-          input.set('name', 'address' + i);
-          input.set('placeholder', 'Address ' + i);
-          if (input.hasClass('placeholder')) input.set('value', 'Address ' + i);
-          i++;
-        }
-      });
+      this.route.reorderPlaceholders();
     },
     
     setLocationFromGeocodeResult: function(result) {
@@ -83,6 +76,10 @@ PlanMyRoute = {
       this.observeElements();
     },
     
+    createAddressAfter: function(existingAddress) {
+      var html = this.addressTemplate.substitute({'index': this.addresses.length});
+    },
+    
     assignStartingAddressLocation: function() {
       new MooGeo('visitor', {onComplete: function(result) {
         result = result.place;
@@ -99,13 +96,30 @@ PlanMyRoute = {
       console.log('here');
     },
     
+    registerAddress: function(address) {
+      this.addresses.push(address);
+    },
+    
     registerAddresses: function() {
       this.addresses = [];
       
-      this.addresses.push(new PlanMyRoute.Address($$('#planning .start input')[0], this, true));
+      this.registerAddress(new PlanMyRoute.Address($$('#planning .start input')[0], this, true))
       $$('input.address').each(function(input) {
-        this.addresses.push(new PlanMyRoute.Address(input, this));
+        this.registerAddress(new PlanMyRoute.Address(input, this));
       }.bind(this));
+    },
+    
+    reorderPlaceholders: function() {
+      var i = 1;
+      this.addresses.each(function(address) {
+        if (!address.start) {
+          var input = address.element;
+          input.set('name', 'address' + i);
+          input.set('placeholder', 'Address ' + i);
+          if (input.hasClass('placeholder')) input.set('value', 'Address ' + i);
+          i++;
+        }
+      });
     }
   })
 }

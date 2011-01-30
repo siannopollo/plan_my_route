@@ -14,3 +14,4 @@
 
 :javascript
   window.route = new PlanMyRoute.Route($('planning'));
+  window.route.addressTemplate = "#{partial('address_field', :locals => {:index => '{index}'}).gsub('"', "'").gsub("\n", '')}";
