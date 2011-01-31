@@ -4,7 +4,12 @@ input[type="text"]
   font-size: 1em
   padding: 0.2em 0.5em
   border: 1px #d1d1d1 solid
-  background: url('/images/input-bg.png') left top no-repeat #fff
+  background: inline-image('input-bg.png') left top no-repeat #fff
   margin: 0
+
+.input-error
+  border-color: desaturate(lighten($red, 15), 10) !important
+  background-color: lighten($red, 61) !important
+  background-image: inline-image('input-bg-error.png')
   
   

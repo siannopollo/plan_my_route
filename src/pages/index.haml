@@ -3,10 +3,8 @@
     .start
       .set= text_field :starting_address, '', :placeholder => 'Starting Address'
     .addresses
-      .set= partial 'address_field', :locals => {:index => 1}
-      .set= partial 'address_field', :locals => {:index => 2}
-      .set= partial 'address_field', :locals => {:index => 3}
-      .set= partial 'address_field', :locals => {:index => 4}
+      - 4.times do |i|
+        .set>= partial 'address_field', :locals => {:index => i + 1}
     .buttons
       %button{:type => :submit} Plan My Route
       .spinner.hide

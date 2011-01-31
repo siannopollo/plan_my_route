@@ -5,7 +5,6 @@ $form-set-width: 460px
     .set
       width: $form-set-width
       display: inline-block
-      position: relative
       input[type="text"]
         width: $form-set-width * 0.75
       margin: 0.3em
@@ -16,11 +15,10 @@ $form-set-width: 460px
         cursor: pointer
         font-size: 18px
         line-height: 1em
+        margin: 0
+        padding: 0
       .remove
         color: $red
-        position: absolute
-        top: -8px
-        left: -10px
       .make_first
         color: $blue
       .add
@@ -33,6 +31,9 @@ $form-set-width: 460px
           @extend .visible
           color: $yellow
           font-weight: bold
+      &.error
+        input[type="text"]
+          @extend .input-error
     .start
       margin-bottom: 0.7em
       input
@@ -41,7 +42,7 @@ $form-set-width: 460px
       margin-top: 2em
       .spinner
         display: inline-block
-        background: url('/images/spinner.gif') left top no-repeat #fff
+        background: inline-image('spinner.gif') left top no-repeat #fff
         height: 32px
         width: 32px
         vertical-align: middle

@@ -25,29 +25,31 @@
                 <div class='start'>
                   <div class='set'><input id="starting_address" name="starting_address" placeholder="Starting Address" type="text" value=""/></div>
                 </div>
-                <div class='set'>
-                  <input class="address" id="address1" name="address1" placeholder="Address 1" type="text" value=""/>
-                  <div class='action make_first' title='Make this your first destination'>S</div>
-                  <div class='action add' title='Add another address'>+</div>
-                  <div class='action remove' title='Remove this address'>D</div>
-                </div>
-                <div class='set'>
-                  <input class="address" id="address2" name="address2" placeholder="Address 2" type="text" value=""/>
-                  <div class='action make_first' title='Make this your first destination'>S</div>
-                  <div class='action add' title='Add another address'>+</div>
-                  <div class='action remove' title='Remove this address'>D</div>
-                </div>
-                <div class='set'>
-                  <input class="address" id="address3" name="address3" placeholder="Address 3" type="text" value=""/>
-                  <div class='action make_first' title='Make this your first destination'>S</div>
-                  <div class='action add' title='Add another address'>+</div>
-                  <div class='action remove' title='Remove this address'>D</div>
-                </div>
-                <div class='set'>
-                  <input class="address" id="address4" name="address4" placeholder="Address 4" type="text" value=""/>
-                  <div class='action make_first' title='Make this your first destination'>S</div>
-                  <div class='action add' title='Add another address'>+</div>
-                  <div class='action remove' title='Remove this address'>D</div>
+                <div class='addresses'>
+                  <div class='set'>
+                    <input class="address" id="address1" name="address1" placeholder="Address 1" type="text" value=""/>
+                    <div class='action make_first' title='Make this your first destination'>S</div>
+                    <div class='action add' title='Add another address'>+</div>
+                    <div class='action remove' title='Remove this address'>D</div>
+                  </div>
+                  <div class='set'>
+                    <input class="address" id="address2" name="address2" placeholder="Address 2" type="text" value=""/>
+                    <div class='action make_first' title='Make this your first destination'>S</div>
+                    <div class='action add' title='Add another address'>+</div>
+                    <div class='action remove' title='Remove this address'>D</div>
+                  </div>
+                  <div class='set'>
+                    <input class="address" id="address3" name="address3" placeholder="Address 3" type="text" value=""/>
+                    <div class='action make_first' title='Make this your first destination'>S</div>
+                    <div class='action add' title='Add another address'>+</div>
+                    <div class='action remove' title='Remove this address'>D</div>
+                  </div>
+                  <div class='set'>
+                    <input class="address" id="address4" name="address4" placeholder="Address 4" type="text" value=""/>
+                    <div class='action make_first' title='Make this your first destination'>S</div>
+                    <div class='action add' title='Add another address'>+</div>
+                    <div class='action remove' title='Remove this address'>D</div>
+                  </div>
                 </div>
                 <div class='buttons'>
                   <button type='submit'>Plan My Route</button>
@@ -59,7 +61,6 @@
             <script type='text/javascript'>
               //<![CDATA[
                 window.route = new PlanMyRoute.Route($('planning'));
-                window.route.addressTemplate = "<input class='address' id='address{index}' name='address{index}' placeholder='Address {index}' type='text' value=''/><div class='action make_first' title='Make this your first destination'>S</div><div class='action add' title='Add another address'>+</div><div class='action remove' title='Remove this address'>D</div>";
               //]]>
             </script>
           </div>
