@@ -12,9 +12,8 @@ PlanMyRoute = {
       this.addAddressTrigger = this.container.getElement('.add');
       this.removeTrigger = this.container.getElement('.remove');
       
-      this.latlng = null,
-      this.first = false;
-      this.error = false;
+      this.latlng = null, this.latitude = null, this.longitude = null,
+      this.first = false, this.error = false;
       
       this.observeElements();
     },
@@ -69,17 +68,20 @@ PlanMyRoute = {
     retrieveCoordinates: function() {
       if (this.hasText()) {
         this.geocoder.geocode({'address': this.text()}, function(results, status) {
-          if (status == google.maps.GeocoderStatus.OK) {
-            this.latlng = results[0].geometry.location;
-          } else {
-            this.markError();
-          }
+          if (status == google.maps.GeocoderStatus.OK) this.setLatLng(results[0].geometry.location);
+          else this.markError();
         }.bind(this));
       }
     },
     
+    setLatLng: function(latlng) {
+      this.latlng = latlng
+      this.latitude = this.latlng.lat();
+      this.longitude = this.latlng.lng();
+    },
+    
     setLocationFromGeocodeResult: function(result) {
-      this.latlng = new google.maps.LatLng(result.coords.latitude, result.coords.longitude);
+      this.setLatLng(new google.maps.LatLng(result.coords.latitude, result.coords.longitude));
       
       this.geocoder.geocode({'latLng': this.latlng}, function(results, status) {
         if (status == google.maps.GeocoderStatus.OK) {
@@ -158,7 +160,6 @@ PlanMyRoute = {
     reorderPlaceholders: function() {
       var i = 1;
       this.form.getElements('.addresses input').each(function(input) {
-        console.log(input)
         input.set('name', 'address' + i);
         input.set('id', 'address' + i);
         input.set('placeholder', 'Address ' + i);
