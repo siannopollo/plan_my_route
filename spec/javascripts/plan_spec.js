@@ -23,7 +23,7 @@ describe('Plan', function() {
   }
   
   afterEach(function() {
-    // teardownDOM();
+    teardownDOM();
   })
   
   it('should do something', function() {
