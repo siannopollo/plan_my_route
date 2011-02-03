@@ -108,22 +108,20 @@ describe('Address', function() {
   });
   
   it('should retrieve coordinates from the text and cache it', function() {
-    expect(address.latlng).toBeNull()
+    address.geocoder.defaultCoordinates = new PlanMyRoute.Coordinates(38.123, -77.321)
+    
+    expect(address.coordinates).toBeNull()
     
     address.retrieveCoordinates()
-    expect(address.latlng).toBeNull()
+    expect(address.coordinates).toBeNull()
     
     address.element.set('value', '1600 Pennsylvania Avenue NW, Washington, DC')
-    runs(function() {
-      address.retrieveCoordinates()
-    })
-    waits(500)
-    runs(function() {
-      expect(address.latlng).not.toBeNull()
-      expect(address.latitude - 38.898).toBeLessThan(0)
-      expect(address.longitude + 77.037).toBeGreaterThan(0)
-      expect(address.isCurrentLocationCached()).toEqual(true)
-    })
+    address.retrieveCoordinates()
+    
+    expect(address.coordinates).not.toBeNull()
+    expect(address.latitude).toEqual(38.123)
+    expect(address.longitude).toEqual(-77.321)
+    expect(address.isCurrentLocationCached()).toEqual(true)
   });
   
   it('should not geocode the address if it is already cached', function() {
