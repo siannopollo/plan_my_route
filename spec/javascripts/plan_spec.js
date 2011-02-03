@@ -1,10 +1,11 @@
 describe('Plan', function() {
-  var route;
+  var route, plane;
   
   beforeEach(function() {
     buildDOM('planning');
-    route = new PlanMyRoute.Route($('planning'));
+    route = new PlanMyRoute.Route($('planning'))
     setDestinations()
+    plan = new PlanMyRoute.Plan(route)
   })
   
   var setDestinations = function() {
@@ -26,7 +27,8 @@ describe('Plan', function() {
     teardownDOM();
   })
   
-  it('should do something', function() {
-    console.log('do it')
+  it('should have some defaults', function() {
+    expect(plan.route).toBe(route)
+    expect(plan.addresses).toBeDefined()
   });
 })

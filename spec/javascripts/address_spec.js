@@ -107,7 +107,7 @@ describe('Address', function() {
     expect(address.hasText()).toEqual(false)
   });
   
-  it('should retrieve coordinates from the text', function() {
+  it('should retrieve coordinates from the text and cache it', function() {
     expect(address.latlng).toBeNull()
     
     address.retrieveCoordinates()
@@ -120,9 +120,22 @@ describe('Address', function() {
     waits(500)
     runs(function() {
       expect(address.latlng).not.toBeNull()
-      expect(address.latitude).toEqual(38.8976964)
-      expect(address.longitude).toEqual(-77.0365191)
+      expect(address.latitude - 38.898).toBeLessThan(0)
+      expect(address.longitude + 77.037).toBeGreaterThan(0)
+      expect(address.isCurrentLocationCached()).toEqual(true)
     })
+  });
+  
+  it('should not geocode the address if it is already cached', function() {
+    var latlng = new google.maps.LatLng(38.23242, -77.379793)
+    address.element.set('value', '123 Main St New York, NY 12345')
+    address.latlng = latlng
+    route.cacheAddressLocation(address)
+    
+    spyOn(address.geocoder, 'geocode')
+    
+    address.retrieveCoordinates()
+    expect(address.geocoder.geocode).not.toHaveBeenCalled()
   });
   
   it('should mark the address with an error if coordinates cannot be gotten from the text', function() {

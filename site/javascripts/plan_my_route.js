@@ -22,6 +22,11 @@ PlanMyRoute = {
       this.route.createAddressAfter(this);
     },
     
+    cachedLocationKey: function() {
+      if (!this.hasText()) return '';
+      return this.text().replace(/[^a-zA-Z0-9]/g, '').toLowerCase();
+    },
+    
     distanceFrom: function(otherAddress) {
       return google.maps.geometry.spherical.computeDistanceBetween(this.latlng, otherAddress.latlng);
     },
@@ -30,6 +35,11 @@ PlanMyRoute = {
       var text = this.text();
       if (text == '' || text == this.element.get('placeholder')) return false;
       return true;
+    },
+    
+    isCurrentLocationCached: function() {
+      if (!this.hasText()) return false;
+      return !!this.route.addressLocationCache[this.cachedLocationKey()];
     },
     
     makeFirst: function(event) {
@@ -66,10 +76,12 @@ PlanMyRoute = {
     },
     
     retrieveCoordinates: function() {
-      if (this.hasText()) {
+      if (this.hasText() && !this.isCurrentLocationCached()) {
         this.geocoder.geocode({'address': this.text()}, function(results, status) {
-          if (status == google.maps.GeocoderStatus.OK) this.setLatLng(results[0].geometry.location);
-          else this.markError();
+          if (status == google.maps.GeocoderStatus.OK) {
+            this.setLatLng(results[0].geometry.location);
+            this.route.cacheAddressLocation(this);
+          } else this.markError();
         }.bind(this));
       }
     },
@@ -103,6 +115,7 @@ PlanMyRoute = {
     initialize: function(container) {
       this.container = container;
       this.geocoder = new google.maps.Geocoder();
+      this.addressLocationCache = {};
       
       this.registerAddresses();
       this.startingAddress = this.addresses[0];
@@ -113,6 +126,10 @@ PlanMyRoute = {
       this.spinner = this.form.getElement('.buttons .spinner');
       
       this.observeElements();
+    },
+    
+    cacheAddressLocation: function(address) {
+      if (address.latlng) this.addressLocationCache[address.cachedLocationKey()] = address.latlng;
     },
     
     createAddressAfter: function(existingAddress) {
@@ -167,6 +184,17 @@ PlanMyRoute = {
         i++;
       });
     }
+  }),
+  
+  Plan: new Class({
+    initialize: function(route) {
+      this.route = route;
+      this.addresses = [];
+      this.route.addresses.each(function(address) {
+        address.retrieveCoordinates();
+        if (address.latlng) this.addresses.push(address);
+      }.bind(this));
+      
+    }
   })
 }
-
