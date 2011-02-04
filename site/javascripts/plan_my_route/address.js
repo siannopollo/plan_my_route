@@ -52,6 +52,11 @@ PlanMyRoute.Address = new Class({
     return !!this.geocoder.addressLocationCache[this.cachedLocationKey()];
   },
   
+  isPlottable: function() {
+    if (!this.coordinates) return false;
+    return true;
+  },
+  
   makeFirst: function(event) {
     this.route.addresses.each(function(address) {
       if (address != this) {

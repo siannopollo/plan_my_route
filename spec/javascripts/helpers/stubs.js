@@ -1,12 +1,10 @@
 var StubbedGeocoder = new Class({
+  Extends: PlanMyRoute.Geocoder,
+  
   initialize: function() {
     this.defaultCoordinates = null;
     this.error = false;
     this.addressLocationCache = {};
-  },
-  
-  cacheAddressLocation: function(address) {
-    if (address.coordinates) this.addressLocationCache[address.cachedLocationKey()] = address.coordinates;
   },
   
   defaultLatLng: function() {
