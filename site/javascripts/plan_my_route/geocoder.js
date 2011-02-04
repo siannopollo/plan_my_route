@@ -2,6 +2,11 @@ PlanMyRoute.Geocoder = new Class({
   initialize: function() {
     this._geocoder = new google.maps.Geocoder();
     this._addressForDistance = null;
+    this.addressLocationCache = {};
+  },
+  
+  cacheAddressLocation: function(address) {
+    if (address.coordinates) this.addressLocationCache[address.cachedLocationKey()] = address.coordinates;
   },
   
   distanceFrom: function(address) {
@@ -13,8 +18,20 @@ PlanMyRoute.Geocoder = new Class({
     return this._geocoder.geocode(options, callback)
   },
   
+  geocodeFromAddress: function(address, callback) {
+    return this._geocoder.geocode({'address': address}, callback);
+  },
+  
+  geocodeFromCoordinates: function(coordinates, callback) {
+    return this._geocoder.geocode({'latLng': coordinates.latlng}, callback);
+  },
+  
   to: function(address) {
-    return google.maps.geometry.spherical.computeDistanceBetween(this._addressForDistance.latlng, address.latlng);
+    var from = this._addressForDistance.coordinates,
+        to = address.coordinates;
+    if (from && to) {
+      return google.maps.geometry.spherical.computeDistanceBetween(from.latlng, to.latlng);
+    } else return null;
   }
 });
 
@@ -22,6 +39,6 @@ PlanMyRoute.Coordinates = new Class({
   initialize: function(latitude, longitude) {
     this.latitude = latitude;
     this.longitude = longitude;
-    this._latlng = new google.maps.LatLng(this.latitude, this.longitude);
+    this.latlng = new google.maps.LatLng(this.latitude, this.longitude);
   }
 })

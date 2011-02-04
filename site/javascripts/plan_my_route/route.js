@@ -2,21 +2,16 @@ PlanMyRoute.Route = new Class({
   initialize: function(container) {
     this.container = container;
     this.geocoder = new PlanMyRoute.Geocoder();
-    this.addressLocationCache = {};
     
     this.registerAddresses();
     this.startingAddress = this.addresses[0];
-    // this.assignStartingAddressLocation();
+    // this.startingAddress.retrieveCurrentCoordinates();
     
     this.form = this.container.getFirst('form');
     this.trigger = this.form.getFirst('.buttons button');
     this.spinner = this.form.getElement('.buttons .spinner');
     
     this.observeElements();
-  },
-  
-  cacheAddressLocation: function(address) {
-    if (address.latlng) this.addressLocationCache[address.cachedLocationKey()] = address.latlng;
   },
   
   createAddressAfter: function(existingAddress) {
@@ -26,14 +21,6 @@ PlanMyRoute.Route = new Class({
     this.registerAddress(new PlanMyRoute.Address(input, this));
     
     this.reorderPlaceholders();
-  },
-  
-  assignStartingAddressLocation: function() {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(function(result) {
-        this.startingAddress.setLocationFromGeocodeResult(result);
-      }.bind(this));
-    }
   },
   
   observeElements: function() {

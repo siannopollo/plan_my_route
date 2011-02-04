@@ -25,7 +25,7 @@ describe('Address', function() {
     expect(address.makeFirstTrigger).not.toBeNull()
     expect(address.addAddressTrigger).not.toBeNull()
     expect(address.removeTrigger).not.toBeNull()
-    expect(address.latlng).toBeNull()
+    expect(address.coordinates).toBeNull()
     expect(address.first).toEqual(false)
     expect(address.error).toEqual(false)
   });
@@ -38,12 +38,26 @@ describe('Address', function() {
     it('should have different defaults', function() {
       expect(startingAddress.container).toBeDefined()
       expect(startingAddress.start).toEqual(true)
-      expect(startingAddress.makeFirstTrigger).toBeNull()
-      expect(startingAddress.addAddressTrigger).toBeNull()
-      expect(startingAddress.removeTrigger).toBeNull()
-      expect(startingAddress.latlng).toBeNull()
+      expect(startingAddress.makeFirstTrigger).toBeUndefined()
+      expect(startingAddress.addAddressTrigger).toBeUndefined()
+      expect(startingAddress.removeTrigger).toBeUndefined()
+      expect(startingAddress.coordinates).toBeNull()
       expect(startingAddress.first).toEqual(false)
       expect(startingAddress.error).toEqual(false)
+    });
+    
+    it('should set its coordinates from the current location', function() {
+      navigator.geolocation.shouldPerform = true
+      navigator.geolocation.defaultLatitude = 12.3455
+      navigator.geolocation.defaultLongitude = -65.3423
+      address.geocoder.defaultReverseGeocodeAddress = 'Smalltown, Florida, USA'
+      
+      expect(startingAddress.text()).toEqual('')
+      startingAddress.retrieveCurrentCoordinates()
+      
+      expect(startingAddress.text()).toEqual('Here - Smalltown, Florida')
+      
+      navigator.geolocation.shouldPerform = false
     });
   })
   
@@ -125,28 +139,26 @@ describe('Address', function() {
   });
   
   it('should not geocode the address if it is already cached', function() {
-    var latlng = new google.maps.LatLng(38.23242, -77.379793)
+    var coordinates = new PlanMyRoute.Coordinates(38.23242, -77.379793)
     address.element.set('value', '123 Main St New York, NY 12345')
-    address.latlng = latlng
-    route.cacheAddressLocation(address)
+    address.coordinates = coordinates
+    address.geocoder.cacheAddressLocation(address)
     
-    spyOn(address.geocoder, 'geocode')
+    spyOn(address.geocoder, 'geocodeFromAddress')
     
     address.retrieveCoordinates()
-    expect(address.geocoder.geocode).not.toHaveBeenCalled()
+    expect(address.geocoder.geocodeFromAddress).not.toHaveBeenCalled()
   });
   
   it('should mark the address with an error if coordinates cannot be gotten from the text', function() {
+    address.geocoder.error = true
+    
     address.element.set('value', 'udsuidpbwbfi')
-    runs(function() {
-      address.retrieveCoordinates()
-    })
-    waits(500)
-    runs(function() {
-      expect(address.latlng).toBeNull()
-      expect(address.latitude).toBeNull()
-      expect(address.longitude).toBeNull()
-      expect(address.error).toEqual(true)
-    })
+    address.retrieveCoordinates()
+    
+    expect(address.coordinates).toBeNull()
+    expect(address.latitude).toBeNull()
+    expect(address.longitude).toBeNull()
+    expect(address.error).toEqual(true)
   });
 })

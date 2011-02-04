@@ -4,21 +4,32 @@ PlanMyRoute.Address = new Class({
     this.route = route;
     this.start = start || false;
     
-    this.geocoder = this.route.geocoder;
-    
-    this.container = this.element.getParent('.set');
-    this.makeFirstTrigger = this.container.getElement('.make_first');
-    this.addAddressTrigger = this.container.getElement('.add');
-    this.removeTrigger = this.container.getElement('.remove');
-    
-    this.latlng = null, this.latitude = null, this.longitude = null,
+    this.coordinates = null, this.latitude = null, this.longitude = null,
     this.first = false, this.error = false;
+    
+    if (this.start) this.addStartMethods();
+    
+    this.geocoder = this.route.geocoder;
+    this.container = this.element.getParent('.set');
+    this.assignElements();
     
     this.observeElements();
   },
   
   addAddress: function(event) {
     this.route.createAddressAfter(this);
+  },
+  
+  addStartMethods: function() {
+    for (var name in PlanMyRoute.Address.StartMethods) {
+      this[name] = PlanMyRoute.Address.StartMethods[name].bind(this);
+    }
+  },
+  
+  assignElements: function() {
+    this.makeFirstTrigger = this.container.getElement('.make_first');
+    this.addAddressTrigger = this.container.getElement('.add');
+    this.removeTrigger = this.container.getElement('.remove');
   },
   
   cachedLocationKey: function() {
@@ -38,7 +49,7 @@ PlanMyRoute.Address = new Class({
   
   isCurrentLocationCached: function() {
     if (!this.hasText()) return false;
-    return !!this.route.addressLocationCache[this.cachedLocationKey()];
+    return !!this.geocoder.addressLocationCache[this.cachedLocationKey()];
   },
   
   makeFirst: function(event) {
@@ -58,11 +69,9 @@ PlanMyRoute.Address = new Class({
   },
   
   observeElements: function() {
-    if (!this.start) {
-      this.makeFirstTrigger.addEvent('click', this.makeFirst.bind(this));
-      this.addAddressTrigger.addEvent('click', this.addAddress.bind(this));
-      this.removeTrigger.addEvent('click', this.remove.bind(this));
-    }
+    this.makeFirstTrigger.addEvent('click', this.makeFirst.bind(this));
+    this.addAddressTrigger.addEvent('click', this.addAddress.bind(this));
+    this.removeTrigger.addEvent('click', this.remove.bind(this));
   },
   
   remove: function(event) {
@@ -76,25 +85,47 @@ PlanMyRoute.Address = new Class({
   
   retrieveCoordinates: function() {
     if (this.hasText() && !this.isCurrentLocationCached()) {
-      this.geocoder.geocode({'address': this.text()}, function(results, status) {
+      this.geocoder.geocodeFromAddress(this.text(), function(results, status) {
         if (status == google.maps.GeocoderStatus.OK) {
-          this.setLatLng(results[0].geometry.location);
-          this.route.cacheAddressLocation(this);
+          var latLng = results[0].geometry.location;
+          this.setCoordinates(latLng.lat(), latLng.lng());
+          this.geocoder.cacheAddressLocation(this);
         } else this.markError();
       }.bind(this));
     }
   },
   
-  setLatLng: function(latlng) {
-    this.latlng = latlng
-    this.latitude = this.latlng.lat();
-    this.longitude = this.latlng.lng();
+  setCoordinates: function(latitude, longitude) {
+    this.coordinates = new PlanMyRoute.Coordinates(latitude, longitude);
+    this.latitude = this.coordinates.latitude;
+    this.longitude = this.coordinates.longitude;
   },
   
-  setLocationFromGeocodeResult: function(result) {
-    this.setLatLng(new google.maps.LatLng(result.coords.latitude, result.coords.longitude));
+  text: function() {
+    return this.element.get('value').trim();
+  }
+});
+
+PlanMyRoute.Address.StartMethods = {
+  assignElements: function() {},
+  observeElements: function() {},
+  
+  disable: function() {
+    this.container.addClass('busy');
+    this.element.set('disabled', 'disabled');
+  },
+  
+  enable: function() {
+    this.container.removeClass('busy');
+    this.element.erase('disabled');
+  },
+  
+  setCoordinatesFromCurrentLocation: function(result) {
+    this.setCoordinates(result.coords.latitude, result.coords.longitude);
     
-    this.geocoder.geocode({'latLng': this.latlng}, function(results, status) {
+    this.geocoder.geocodeFromCoordinates(this.coordinates, function(results, status) {
+      this.enable();
+      
       if (status == google.maps.GeocoderStatus.OK) {
         if (results[2]) {
           var display = 'Here - ' + results[2].formatted_address;
@@ -105,7 +136,13 @@ PlanMyRoute.Address = new Class({
     }.bind(this));
   },
   
-  text: function() {
-    return this.element.get('value').trim();
+  retrieveCurrentCoordinates: function() {
+    if (navigator.geolocation) {
+      this.disable();
+      
+      navigator.geolocation.getCurrentPosition(function(result) {
+        this.setCoordinatesFromCurrentLocation(result);
+      }.bind(this));
+    }
   }
-});
+}

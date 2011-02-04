@@ -37,8 +37,18 @@ $form-set-width: 460px
           @extend .input-error
     .start
       margin-bottom: 0.7em
-      input
-        font-size: 1.2em
+      .set
+        input
+          font-size: 1.2em
+        img
+          display: none
+          vertical-align: text-top
+          margin-left: -2em
+          height: 20px
+          width: 20px
+        &.busy
+          img
+            display: inline-block
     .buttons
       margin-top: 2em
       .spinner
