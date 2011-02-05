@@ -40,6 +40,13 @@ PlanMyRoute.Plan = new Class({
     if (this.addresses.contains(this.route.startingAddress)) {
       this.sortedAddresses = [this.route.startingAddress];
       this.addresses.erase(this.route.startingAddress);
+      
+      if (this.route.firstAddress()) {
+        var first = this.route.firstAddress();
+        this.sortedAddresses.push(first);
+        this.addresses.erase(first);
+      }
+      
       var times = this.addresses.length;
       
       for (var i = 0; i < times; i++) {

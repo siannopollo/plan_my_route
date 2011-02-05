@@ -49,4 +49,18 @@ describe('Plan', function() {
     expect(plan.addresses[2].text()).toEqual('1812 Trinity Rd. Raleigh, NC 27607')
     expect(plan.addresses[3].text()).toEqual('4625 Mill Rock Lane Raleigh NC')
   });
+  
+  it('should take into account the first destination', function() {
+    route.addresses.each(function(address) {
+      if (address.text() == '1812 Trinity Rd. Raleigh, NC 27607') address.first = true
+    })
+    
+    plan.geocodeAddresses()
+    
+    expect(plan.addresses.length).toEqual(4)
+    expect(plan.addresses[0].text()).toEqual('2050 Clark ave, Raleigh, NC 27605')
+    expect(plan.addresses[1].text()).toEqual('1812 Trinity Rd. Raleigh, NC 27607')
+    expect(plan.addresses[2].text()).toEqual('4204 Reavis Road, Raleigh, NC 27606')
+    expect(plan.addresses[3].text()).toEqual('4625 Mill Rock Lane Raleigh NC')
+  });
 })

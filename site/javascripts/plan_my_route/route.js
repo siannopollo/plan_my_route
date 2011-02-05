@@ -24,6 +24,14 @@ PlanMyRoute.Route = new Class({
     this.reorderPlaceholders();
   },
   
+  firstAddress: function() {
+    var first = null;
+    this.addresses.each(function(address) {
+      if (address.first) first = address;
+    });
+    return first;
+  },
+  
   observeElements: function() {
     this.form.addEvent('submit', function(event) {event.stop()});
     this.trigger.addEvent('click', this.plan.bind(this));
