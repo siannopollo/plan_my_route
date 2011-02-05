@@ -11,7 +11,9 @@ var buildDOM = function(containerId) {
       buttons = new Element('div', {'class': 'buttons'}),
       button = new Element('button', {type: 'submit'}),
       spinner = new Element('div', {'class': 'spinner hide'}),
-      mapContainer = new Element('div', {'class': 'hide', id: 'google_map'});
+      mapContainer = new Element('div', {'class': 'hide', id: 'google_map'}),
+      map = new Element('div', {'class': 'map'}),
+      drivingDirections = new Element('div', {'class': 'driving_directions'});
   
   startContainer.adopt(set.clone().adopt(start))
   addresses.adopt(newAddress(set.clone(), 1), newAddress(set.clone(), 2), newAddress(set.clone(), 3), newAddress(set.clone(), 4))
@@ -20,6 +22,7 @@ var buildDOM = function(containerId) {
   
   form.adopt(startContainer, addresses, buttons)
   
+  mapContainer.adopt(map, drivingDirections)
   container.adopt(form, mapContainer)
   
   var page = new Element('div', {id: 'page'}),

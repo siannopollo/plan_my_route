@@ -59,6 +59,16 @@ $form-set-width: 460px
         vertical-align: middle
         margin-left: 1em
 
+$map-pad: 5px
 #google_map
-  width: 600px
-  height: 400px
+  margin-top: 1em
+  .wrapper
+    padding: $map-pad - 1px
+    border: solid 1px #999
+    @extend .round-corners
+    .map
+      @extend .round-corners
+      width: $main-width - $page-pad - (2 * $map-pad)
+      height: 500px
+  .driving_directions
+    margin-top: 0.5em
