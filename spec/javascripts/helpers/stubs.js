@@ -33,9 +33,21 @@ var StubbedGeocoder = new Class({
     return google.maps.GeocoderStatus.OK;
   }
 })
-
 PlanMyRoute.DefaultGeocoder = PlanMyRoute.Geocoder
 PlanMyRoute.Geocoder = StubbedGeocoder
+
+StubbedMap = new Class({
+  initialize: function(route, element) {
+    this.route = route;
+    this.element = element;
+  },
+  
+  plotAddresses: function(addresses, callback) {
+    if (callback) callback();
+  }
+})
+PlanMyRoute.DefaultMap = PlanMyRoute.Map
+PlanMyRoute.Map = StubbedMap
 
 var fakeGetCurrentPosition = function(callback) {
   var defaultResults = {

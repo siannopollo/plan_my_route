@@ -10,6 +10,7 @@ PlanMyRoute.Route = new Class({
     this.form = this.container.getFirst('form');
     this.trigger = this.form.getFirst('.buttons button');
     this.spinner = this.form.getElement('.buttons .spinner');
+    this.map = new PlanMyRoute.Map(this, $('google_map'));
     
     this.observeElements();
   },
@@ -30,9 +31,8 @@ PlanMyRoute.Route = new Class({
   
   plan: function(event) {
     this.spinner.removeClass('hide');
-    this.addresses.each(function(address) {
-      address.retrieveCoordinates();
-    })
+    this.currentPlan = new PlanMyRoute.Plan(this);
+    this.currentPlan.execute(this.routePlanned.bind(this));
   },
   
   registerAddress: function(address) {
@@ -57,5 +57,9 @@ PlanMyRoute.Route = new Class({
       if (input.hasClass('placeholder')) input.set('value', 'Address ' + i);
       i++;
     });
+  },
+  
+  routePlanned: function() {
+    this.spinner.addClass('hide');
   }
 });

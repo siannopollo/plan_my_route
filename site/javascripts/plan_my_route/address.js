@@ -88,15 +88,18 @@ PlanMyRoute.Address = new Class({
     this.route.reorderPlaceholders();
   },
   
-  retrieveCoordinates: function() {
+  retrieveCoordinates: function(callback) {
     if (this.hasText() && !this.isCurrentLocationCached()) {
       this.geocoder.geocodeFromAddress(this.text(), function(results, status) {
         if (status == google.maps.GeocoderStatus.OK) {
           var latLng = results[0].geometry.location;
           this.setCoordinates(latLng.lat(), latLng.lng());
           this.geocoder.cacheAddressLocation(this);
+          if (callback) callback();
         } else this.markError();
       }.bind(this));
+    } else {
+      if (callback) callback();
     }
   },
   

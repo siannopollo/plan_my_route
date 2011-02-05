@@ -40,6 +40,9 @@ describe('Plan', function() {
   });
   
   it('should order the addresses', function() {
+    expect(plan.addresses.length).toEqual(0)
+    plan.geocodeAddresses()
+    
     expect(plan.addresses.length).toEqual(4)
     expect(plan.addresses[0].text()).toEqual('2050 Clark ave, Raleigh, NC 27605')
     expect(plan.addresses[1].text()).toEqual('4204 Reavis Road, Raleigh, NC 27606')

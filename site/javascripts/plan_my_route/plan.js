@@ -2,17 +2,38 @@ PlanMyRoute.Plan = new Class({
   initialize: function(route) {
     this.route = route;
     this.geocoder = this.route.geocoder;
-    this.addresses = [];
+    this.map = this.route.map;
     
+    this.addresses = [];
+    this.totalGeocodeCount = 0;
+    this.geocodeCount = 0;
+  },
+  
+  execute: function(callback) {
+    this.callbackAfterMapping = callback;
     this.geocodeAddresses();
-    this.selectPlottableAddresses();
-    this.orderAddresses();
   },
   
   geocodeAddresses: function() {
+    this.totalGeocodeCount = this.route.addresses.length;
+    this.geocodeCount = 0;
+    
     this.route.addresses.each(function(address) {
-      address.retrieveCoordinates();
-    });
+      address.retrieveCoordinates(this.notifyGeocoding.bind(this));
+    }.bind(this));
+  },
+  
+  notifyGeocoding: function() {
+    this.geocodeCount++;
+    if (this.geocodeCount >= this.totalGeocodeCount) {
+      this.totalGeocodeCount = 0;
+      this.geocodeCount = 0;
+      
+      this.selectPlottableAddresses();
+      this.orderAddresses();
+      
+      this.map.plotAddresses(this.addresses, this.callbackAfterMapping);
+    }
   },
   
   orderAddresses: function() {
