@@ -59,7 +59,8 @@ PlanMyRoute.Map = new Class({
         scrollwheel: false
       });
       this.renderer = new google.maps.DirectionsRenderer({
-        draggable: true, map: this.map, panel: this.directionsPanel
+        draggable: true, map: this.map, panel: this.directionsPanel,
+        markerOptions: {draggable: false}
       });
       
       google.maps.event.addListener(this.renderer, 'directions_changed', this.correctDirectionsMarkers.bind(this));

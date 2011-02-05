@@ -49,7 +49,9 @@ PlanMyRoute.Address = new Class({
   
   isCurrentLocationCached: function() {
     if (!this.hasText()) return false;
-    return !!this.geocoder.addressLocationCache[this.cachedLocationKey()];
+    var coordinates = this.geocoder.addressLocationCache[this.cachedLocationKey()];
+    if (coordinates) this.coordinates = coordinates;
+    return !!coordinates;
   },
   
   isPlottable: function() {
@@ -88,18 +90,28 @@ PlanMyRoute.Address = new Class({
     this.route.reorderPlaceholders();
   },
   
+  removeErrors: function() {
+    this.container.removeClass('error');
+    this.error = false;
+  },
+  
   retrieveCoordinates: function(callback) {
+    if (!callback) callback = function() {};
+    
     if (this.hasText() && !this.isCurrentLocationCached()) {
       this.geocoder.geocodeFromAddress(this.text(), function(results, status) {
         if (status == google.maps.GeocoderStatus.OK) {
           var latLng = results[0].geometry.location;
           this.setCoordinates(latLng.lat(), latLng.lng());
           this.geocoder.cacheAddressLocation(this);
-          if (callback) callback();
+          this.removeErrors();
         } else this.markError();
+        
+        callback()
       }.bind(this));
     } else {
-      if (callback) callback();
+      callback();
+      this.removeErrors();
     }
   },
   
