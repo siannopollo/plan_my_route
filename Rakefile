@@ -24,13 +24,9 @@ task :build => 'styles:clear' do
 end
 
 desc 'Clears and generates new styles, builds and deploys'
-task :deploy => [:build, :push] do
+task :deploy => :build do
   puts '*** Deploying the site ***'
-end
-
-desc "push"
-task :push do
-  # system("rsync -avz --delete site/ #{ssh_user}:#{remote_root}")
+  system 'scp -r site deploy@iannopollo.com:/var/www/apps/plan_my_route/'
 end
 
 namespace :styles do
