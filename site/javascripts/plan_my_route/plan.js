@@ -30,7 +30,7 @@ PlanMyRoute.Plan = new Class({
       this.geocodeCount = 0;
       
       this.selectPlottableAddresses();
-      this.orderAddresses();
+      if (this.route.isOptimized()) this.orderAddresses();
       
       this.map.plotAddresses(this.addresses, this.callbackAfterMapping);
     }

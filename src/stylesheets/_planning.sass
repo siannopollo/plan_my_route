@@ -52,12 +52,19 @@ $form-set-width: 460px
     .buttons
       margin-top: 2em
       .spinner
-        display: inline-block
+        display: inline-block !important
         background: inline-image('spinner.gif') left top no-repeat #fff
         height: 32px
         width: 32px
         vertical-align: middle
-        margin-left: 1em
+        margin: 0 0.6em
+        &.hide
+          visibility: hidden
+    .buttons, .actions
+      display: inline-block
+    .actions
+      input, label
+        vertical-align: middle
 
 $map-pad: 5px
 #google_map

@@ -10,6 +10,7 @@ var buildDOM = function(containerId) {
       addresses = new Element('div', {'class': 'addresses'}),
       buttons = new Element('div', {'class': 'buttons'}),
       button = new Element('button', {type: 'submit'}),
+      optimize = new Element('input', {type: 'checkbox', checked: 'checked', id: 'optimize'}),
       spinner = new Element('div', {'class': 'spinner hide'}),
       mapContainer = new Element('div', {'class': 'hide', id: 'google_map'}),
       map = new Element('div', {'class': 'map'}),
@@ -18,7 +19,7 @@ var buildDOM = function(containerId) {
   startContainer.adopt(set.clone().adopt(start))
   addresses.adopt(newAddress(set.clone(), 1), newAddress(set.clone(), 2), newAddress(set.clone(), 3), newAddress(set.clone(), 4))
   button.appendText('Plan My Route')
-  buttons.adopt(button, spinner)
+  buttons.adopt(button, spinner, optimize)
   
   form.adopt(startContainer, addresses, buttons)
   

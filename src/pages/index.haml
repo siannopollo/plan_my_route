@@ -10,6 +10,9 @@
     .buttons
       %button{:type => :submit} Plan My Route
       .spinner.hide
+    .actions
+      %input#optimize{:type => 'checkbox', :checked => 'checked'}
+      %label{:for => 'optimize'} Optimize my route
   
   #google_map.hide
     .wrapper

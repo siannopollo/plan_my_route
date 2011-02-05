@@ -10,6 +10,7 @@ PlanMyRoute.Route = new Class({
     this.form = this.container.getFirst('form');
     this.trigger = this.form.getFirst('.buttons button');
     this.spinner = this.form.getElement('.buttons .spinner');
+    this.optimize = $('optimize');
     this.map = new PlanMyRoute.Map(this, $('google_map'));
     
     this.observeElements();
@@ -30,6 +31,10 @@ PlanMyRoute.Route = new Class({
       if (address.first) first = address;
     });
     return first;
+  },
+  
+  isOptimized: function() {
+    return this.optimize.checked;
   },
   
   observeElements: function() {
