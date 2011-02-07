@@ -2,6 +2,7 @@
 <html xmlns='http://www.w3.org/1999/xhtml'>
   <head>
     <title>Plan My Route</title>
+    <link href='http://fonts.googleapis.com/css?family=Coda:800' rel='stylesheet' type='text/css' />
     <link href="/stylesheets/screen.css" media="screen" rel="stylesheet" type="text/css"/>
     <!--[if IE 6]>
       <link href="/stylesheets/ie6.css" media="screen" rel="stylesheet" type="text/css"/>
@@ -13,7 +14,7 @@
   <body>
     <div id='header'>
       <div class='wrap'>
-        <h4>Plan My Route</h4>
+        <h4><div class='plan'>Plan</div><div class='my'>My</div><div class='route'>Route</div></h4>
       </div>
     </div>
     <div id='page'>
@@ -23,32 +24,9 @@
             <div id='planning'>
               <form action='/' method='get'>
                 <div class='start'>
-                  <div class='set'>
-                    <input id="starting_address" name="starting_address" placeholder="Starting Address" type="text" value=""/>
-                    <img alt="Spinner" src="images/spinner.gif"/>
-                  </div>
+                  <div class='set'><input id="starting_address" name="starting_address" placeholder="Starting Address" type="text" value=""/></div>
                 </div>
-                <div class='addresses'><div class='set'>
-                    <input class="address" id="address1" name="address1" placeholder="Address 1" type="text" value=""/>
-                    <div class='action make_first' title='Make this your first destination'>S</div>
-                    <div class='action add' title='Add another address'>+</div>
-                    <div class='action remove' title='Remove this address'>D</div>
-                  </div><div class='set'>
-                    <input class="address" id="address2" name="address2" placeholder="Address 2" type="text" value=""/>
-                    <div class='action make_first' title='Make this your first destination'>S</div>
-                    <div class='action add' title='Add another address'>+</div>
-                    <div class='action remove' title='Remove this address'>D</div>
-                  </div><div class='set'>
-                    <input class="address" id="address3" name="address3" placeholder="Address 3" type="text" value=""/>
-                    <div class='action make_first' title='Make this your first destination'>S</div>
-                    <div class='action add' title='Add another address'>+</div>
-                    <div class='action remove' title='Remove this address'>D</div>
-                  </div><div class='set'>
-                    <input class="address" id="address4" name="address4" placeholder="Address 4" type="text" value=""/>
-                    <div class='action make_first' title='Make this your first destination'>S</div>
-                    <div class='action add' title='Add another address'>+</div>
-                    <div class='action remove' title='Remove this address'>D</div>
-                  </div></div>
+                <div class='addresses'><div class='set'><input class="address" id="address1" name="address1" placeholder="Address 1" type="text" value=""/><div class='action make_first' title='Make this your first destination'></div><div class='action add' title='Add another address'></div><div class='action remove' title='Remove this address'></div></div><div class='set'><input class="address" id="address2" name="address2" placeholder="Address 2" type="text" value=""/><div class='action make_first' title='Make this your first destination'></div><div class='action add' title='Add another address'></div><div class='action remove' title='Remove this address'></div></div><div class='set'><input class="address" id="address3" name="address3" placeholder="Address 3" type="text" value=""/><div class='action make_first' title='Make this your first destination'></div><div class='action add' title='Add another address'></div><div class='action remove' title='Remove this address'></div></div><div class='set'><input class="address" id="address4" name="address4" placeholder="Address 4" type="text" value=""/><div class='action make_first' title='Make this your first destination'></div><div class='action add' title='Add another address'></div><div class='action remove' title='Remove this address'></div></div></div>
                 <div class='buttons'>
                   <button type='submit'>Plan My Route</button>
                   <div class='spinner hide'></div>

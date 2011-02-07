@@ -128,41 +128,5 @@ PlanMyRoute.Address = new Class({
 
 PlanMyRoute.Address.StartMethods = {
   assignElements: function() {},
-  observeElements: function() {},
-  
-  disable: function() {
-    this.container.addClass('busy');
-    this.element.set('disabled', 'disabled');
-  },
-  
-  enable: function() {
-    this.container.removeClass('busy');
-    this.element.erase('disabled');
-  },
-  
-  setCoordinatesFromCurrentLocation: function(result) {
-    this.setCoordinates(result.coords.latitude, result.coords.longitude);
-    
-    this.geocoder.geocodeFromCoordinates(this.coordinates, function(results, status) {
-      this.enable();
-      
-      if (status == google.maps.GeocoderStatus.OK) {
-        if (results[2]) {
-          var display = 'Here - ' + results[2].formatted_address;
-          this.element.set('value', display.replace(/, USA/, ''));
-          this.element.removeClass('placeholder');
-        }
-      }
-    }.bind(this));
-  },
-  
-  retrieveCurrentCoordinates: function() {
-    if (navigator.geolocation) {
-      this.disable();
-      
-      navigator.geolocation.getCurrentPosition(function(result) {
-        this.setCoordinatesFromCurrentLocation(result);
-      }.bind(this));
-    }
-  }
+  observeElements: function() {}
 }

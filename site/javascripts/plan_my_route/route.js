@@ -5,7 +5,6 @@ PlanMyRoute.Route = new Class({
     
     this.registerAddresses();
     this.startingAddress = this.addresses[0];
-    // this.startingAddress.retrieveCurrentCoordinates();
     
     this.form = this.container.getFirst('form');
     this.trigger = this.form.getFirst('.buttons button');

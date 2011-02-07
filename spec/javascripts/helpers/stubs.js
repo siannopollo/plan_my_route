@@ -48,13 +48,3 @@ StubbedMap = new Class({
 })
 PlanMyRoute.DefaultMap = PlanMyRoute.Map
 PlanMyRoute.Map = StubbedMap
-
-var fakeGetCurrentPosition = function(callback) {
-  var defaultResults = {
-    coords: {latitude: this.defaultLatitude, longitude: this.defaultLongitude}
-  }
-  if (this.shouldPerform) callback(defaultResults)
-}
-
-navigator.geolocation.oldGetCurrentPosition = navigator.geolocation.getCurrentPosition
-navigator.geolocation.getCurrentPosition = fakeGetCurrentPosition

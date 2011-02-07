@@ -45,20 +45,6 @@ describe('Address', function() {
       expect(startingAddress.first).toEqual(false)
       expect(startingAddress.error).toEqual(false)
     });
-    
-    it('should set its coordinates from the current location', function() {
-      navigator.geolocation.shouldPerform = true
-      navigator.geolocation.defaultLatitude = 12.3455
-      navigator.geolocation.defaultLongitude = -65.3423
-      address.geocoder.defaultReverseGeocodeAddress = 'Smalltown, Florida, USA'
-      
-      expect(startingAddress.text()).toEqual('')
-      startingAddress.retrieveCurrentCoordinates()
-      
-      expect(startingAddress.text()).toEqual('Here - Smalltown, Florida')
-      
-      navigator.geolocation.shouldPerform = false
-    });
   })
   
   it('should be first after click the make first button', function() {
