@@ -1,0 +1,5 @@
+source 'http://rubygems.org'
+gem 'staticmatic', '~> 0.11.1'
+gem 'jammit', '~> 0.6.0'
+gem 'fancy-buttons', '~> 0.6.0.pre1'
+gem 'compass-rgbapng'

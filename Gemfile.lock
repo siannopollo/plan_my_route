@@ -1,0 +1,32 @@
+GEM
+  remote: http://rubygems.org/
+  specs:
+    chunky_png (0.9.2)
+    closure-compiler (1.0.0)
+    compass (0.10.6)
+      haml (>= 3.0.4)
+    compass-rgbapng (0.1.1)
+      chunky_png (>= 0.8.0)
+      compass (>= 0.10.0)
+    fancy-buttons (0.6.0.pre1)
+      compass (>= 0.10.0)
+      haml (>= 3.0.2)
+    haml (3.0.25)
+    jammit (0.6.0)
+      closure-compiler (>= 0.1.0)
+      yui-compressor (>= 0.9.1)
+    rack (1.2.1)
+    staticmatic (0.11.1)
+      compass (>= 0.10.0)
+      haml (>= 2.0.0)
+      rack (>= 1.0)
+    yui-compressor (0.9.3)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  compass-rgbapng
+  fancy-buttons (~> 0.6.0.pre1)
+  jammit (~> 0.6.0)
+  staticmatic (~> 0.11.1)

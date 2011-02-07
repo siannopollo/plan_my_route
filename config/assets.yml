@@ -1,0 +1,8 @@
+package_path: javascripts
+package_assets: on
+javascript_compressor: yui
+
+javascripts:
+  defaults:
+    - site/javascripts/*.js
+    - site/javascripts/plan_my_route/*.js
