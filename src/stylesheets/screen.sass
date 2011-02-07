@@ -20,9 +20,15 @@ body
     background-color: $page-color
     padding-bottom: 3px
     .wrap
-      height: 40px
       h4
-        line-height: 40px
+        @extend .coda-font
+        font-size: 48px
+        white-space: nowrap
+        .plan, .my, .route
+          display: inline
+          +smart-text-shadow(#444)
+        .my
+          color: $red
   #page
     .wrap
       @extend .round-corners

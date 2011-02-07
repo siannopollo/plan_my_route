@@ -18,6 +18,7 @@ PlanMyRoute.Route = new Class({
   
   createAddressAfter: function(existingAddress) {
     var newContainer = existingAddress.container.clone();
+    newContainer.removeClass('first').removeClass('error');
     existingAddress.container.grab(newContainer, 'after');
     var input = newContainer.getElement('input'); input.set('value', '');
     this.registerAddress(new PlanMyRoute.Address(input, this));

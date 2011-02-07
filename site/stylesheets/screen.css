@@ -66,7 +66,7 @@ p, ul, ol { padding-bottom: 1.1em; }
 
 .invisible, #planning form .set .action { visibility: hidden; }
 
-.unselectable, #planning form .set { -moz-user-select: none; -khtml-user-select: none; user-select: none; }
+.unselectable, #planning { -moz-user-select: none; -khtml-user-select: none; user-select: none; }
 
 .selectable { -moz-user-select: auto; -khtml-user-select: auto; user-select: auto; }
 

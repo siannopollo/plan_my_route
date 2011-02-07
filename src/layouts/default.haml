@@ -2,6 +2,7 @@
 %html{:xmlns=>"http://www.w3.org/1999/xhtml"}
   %head
     %title Plan My Route
+    %link{:href => 'http://fonts.googleapis.com/css?family=Coda:800', :rel => 'stylesheet', :type => 'text/css'}
     = stylesheets :screen, :media => :screen
     /[if IE 6]
       = stylesheets :ie6, :media => :screen
@@ -11,7 +12,10 @@
   %body
     #header
       .wrap
-        %h4 Plan My Route
+        %h4
+          .plan>Plan
+          .my>My
+          .route>Route
     #page
       #main
         #content

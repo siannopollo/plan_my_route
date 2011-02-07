@@ -1,37 +1,36 @@
 $form-set-width: 460px
 
 #planning
+  @extend .unselectable
   form
     .set
       width: $form-set-width
       display: inline-block
-      @extend .unselectable
       input[type="text"]
         width: $form-set-width * 0.75
       margin: 0.3em
       .action
         @extend .invisible
-        @extend .pictos-font
         display: inline-block
         cursor: pointer
-        font-size: 18px
-        line-height: 1em
-        margin: 0
+        height: 16px
+        width: 17px
+        margin: 0 1px -2px
         padding: 0
+        background: inline-image('actions.png') left top no-repeat #fff
       .remove
-        color: $red
+        background-position: -51px center
       .make_first
-        color: $blue
+        background-position: 0px center
       .add
-        color: $green
+        background-position: -34px center
       &:hover
         .action
           @extend .visible
       &.first
         .action.make_first
           @extend .visible
-          color: $yellow
-          font-weight: bold
+          background-position: -17px center
       &.error
         input[type="text"]
           @extend .input-error

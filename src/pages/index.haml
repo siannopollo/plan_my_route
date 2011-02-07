@@ -3,7 +3,7 @@
     .start
       .set
         = text_field :starting_address, '', :placeholder => 'Starting Address'
-        = img 'spinner.gif'
+        .spinner.hide
     .addresses
       - 4.times do |i|
         .set>= partial 'address_field', :locals => {:index => i + 1}

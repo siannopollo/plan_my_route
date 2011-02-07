@@ -32,7 +32,8 @@ PlanMyRoute.Plan = new Class({
       this.selectPlottableAddresses();
       if (this.route.isOptimized()) this.orderAddresses();
       
-      this.map.plotAddresses(this.addresses, this.callbackAfterMapping);
+      if (this.addresses.length > 1) this.map.plotAddresses(this.addresses, this.callbackAfterMapping);
+      else this.callbackAfterMapping();
     }
   },
   
