@@ -55,9 +55,19 @@ $form-set-width: 460px
     .actions
       input, label
         vertical-align: middle
+  #print
+    text-align: right
+    button
+      padding: 0.2em 0.3em
+      &.print_text
+        +fancy-button(adjust-hue($button-color, 140), 12px, 8px, 3px)
+      &.print_all
+        +fancy-button(adjust-hue($button-color, 175), 12px, 8px, 3px)
+        
 
 $map-pad: 5px
 #google_map
+  +pie-clearfix
   margin-top: 1em
   .wrapper
     padding: $map-pad - 1px
@@ -69,3 +79,4 @@ $map-pad: 5px
       height: 500px
   .driving_directions
     margin-top: 0.5em
+    @extend .selectable

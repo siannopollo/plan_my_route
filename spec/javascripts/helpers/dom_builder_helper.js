@@ -12,6 +12,9 @@ var buildDOM = function(containerId) {
       button = new Element('button', {type: 'submit'}),
       optimize = new Element('input', {type: 'checkbox', checked: 'checked', id: 'optimize'}),
       spinner = new Element('div', {'class': 'spinner hide'}),
+      printContainer = new Element('div', {id: 'print', 'class': 'hide'}),
+      printText = new Element('button', {'class': 'print_text'}),
+      printAll = new Element('button', {'class': 'print_all'}),
       mapContainer = new Element('div', {'class': 'hide', id: 'google_map'}),
       map = new Element('div', {'class': 'map'}),
       drivingDirections = new Element('div', {'class': 'driving_directions'});
@@ -22,6 +25,11 @@ var buildDOM = function(containerId) {
   buttons.adopt(button, spinner, optimize)
   
   form.adopt(startContainer, addresses, buttons)
+  
+  printText.appendText('Print text')
+  printAll.appendText('Print text + map')
+  printContainer.adopt(printText, printAll)
+  container.adopt(printContainer)
   
   mapContainer.adopt(map, drivingDirections)
   container.adopt(form, mapContainer)
