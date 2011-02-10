@@ -59,20 +59,18 @@ PlanMyRoute.Route = new Class({
     this.currentPlan.execute(this.routePlanned.bind(this));
   },
   
-  print: function(afterPrint) {
-    if (afterPrint) setTimeout(afterPrint, 300);
+  print: function() {
     window.print();
   },
   
   printAll: function(event) {
+    this.map.container.removeClass('print_text');
     this.print();
   },
   
   printText: function(event) {
     this.map.container.addClass('print_text');
-    this.print(function() {
-      this.map.container.removeClass('print_text');
-    }.bind(this))
+    this.print();
   },
   
   registerAddress: function(address) {
