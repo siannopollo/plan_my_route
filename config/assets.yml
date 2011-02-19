@@ -1,5 +1,5 @@
 package_path: javascripts
-package_assets: on
+package_assets: off
 javascript_compressor: yui
 
 javascripts:

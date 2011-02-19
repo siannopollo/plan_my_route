@@ -20,11 +20,17 @@ end
 desc 'Builds the site'
 task :build => 'styles:clear' do
   puts '*** Building the site ***'
-  system 'rm -f ./site/stylesheets/*.css && staticmatic build .'
+  
+  require 'staticmatic'
+  staticmatic = StaticMatic::Base.new File.dirname(__FILE__)
+  staticmatic.run 'build'
 end
 
 desc 'Clears and generates new styles, builds and deploys'
-task :deploy => :build do
+task :deploy do
+  PACKAGE_ASSETS = true
+  Rake::Task[:build].invoke
+  
   puts '*** Deploying the site ***'
   system 'scp -r site deploy@iannopollo.com:/var/www/apps/plan_my_route/'
 end
